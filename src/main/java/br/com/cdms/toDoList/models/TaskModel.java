@@ -17,19 +17,19 @@ public class TaskModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
-    private String name;
+    private String title;
     @Column(nullable = true)
     private String description;
     @Column(nullable = false)
     private LocalDate deadline;
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean status = false;
 
     public TaskModel() {
     }
 
-    public TaskModel(String name, String description, LocalDate deadline) {
-        this.name = name;
+    public TaskModel(String title, String description, LocalDate deadline) {
+        this.title = title;
         this.description = description;
         this.deadline = deadline;
     }
@@ -38,12 +38,12 @@ public class TaskModel implements Serializable {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -75,11 +75,11 @@ public class TaskModel implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskModel taskModel = (TaskModel) o;
-        return Objects.equals(id, taskModel.id) && Objects.equals(name, taskModel.name);
+        return Objects.equals(id, taskModel.id) && Objects.equals(title, taskModel.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, title);
     }
 }
