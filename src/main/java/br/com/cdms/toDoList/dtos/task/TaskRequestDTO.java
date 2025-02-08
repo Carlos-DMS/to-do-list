@@ -1,4 +1,8 @@
 package br.com.cdms.toDoList.dtos.task;
 
-public record TaskRequestDTO(String name, String description, String deadline) {
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
+
+public record TaskRequestDTO(String name, String description, @JsonFormat(pattern = "yyyy-MM-dd") LocalDate deadline) {
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
@@ -26,16 +25,13 @@ public class TaskModel implements Serializable {
     @Column(nullable = false)
     private Boolean status;
 
-    @Transient
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     public TaskModel() {
     }
 
-    public TaskModel(String name, String description, String deadline) {
+    public TaskModel(String name, String description, LocalDate deadline) {
         this.name = name;
         this.description = description;
-        this.deadline = LocalDate.parse(deadline, dateFormatter);
+        this.deadline = deadline;
     }
 
     public Long getId() {
@@ -62,14 +58,9 @@ public class TaskModel implements Serializable {
         return deadline;
     }
 
-    public String getDeadlineToString() {
-        return deadline.format(dateFormatter);
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
-
-    public void setDeadline(String deadline) {
-        this.deadline = LocalDate.parse(deadline, dateFormatter);
-    }
-
 
     public Boolean getStatus() {
         return status;
